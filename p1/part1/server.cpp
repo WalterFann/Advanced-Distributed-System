@@ -33,39 +33,39 @@ int main(int argc, char const *argv[])
 	}
 
 	listen(sock, 3);
-
+/*
 	//For Q1
-	//new_sock = accept(sock, (struct sockaddr *)&address, (socklen_t*)&addrlen);
-	//while(1)
-	//{
-	//	valread = read(new_sock, buffer, sizeof(buffer));
-	//	buffer[valread] = '\0';
-	//	printf("%d\n",valread);
-	//	if(buffer[valread-3] == 'e' &&buffer[valread-2] == 'n' &&buffer[valread-1] == 'd'){
-	//		printf("end session");
-	//		break;
-	//	}
-	//	send(new_sock, ACK, strlen(ACK), 0);
-	//}
-
+	new_sock = accept(sock, (struct sockaddr *)&address, (socklen_t*)&addrlen);
+	while(1)
+	{
+		valread = read(new_sock, buffer, sizeof(buffer));
+		buffer[valread] = '\0';
+		printf("%d\n",valread);
+		if(buffer[valread-3] == 'e' &&buffer[valread-2] == 'n' &&buffer[valread-1] == 'd'){
+			printf("end session");
+			break;
+		}
+		send(new_sock, ACK, strlen(ACK), 0);
+	}
+*/
 	//For Q2
-	//new_sock = accept(sock, (struct sockaddr *)&address, (socklen_t*)&addrlen);
-	//int count = 0;
-	//while(1)
-	//{
-	//	valread = read(new_sock, buffer, sizeof(buffer));
-	//	count += valread;
-	//	if(buffer[valread-3] == 'e' &&buffer[valread-2] == 'n' &&buffer[valread-1] == 'd'){
-	//		printf("end session\n");
-	//		send(new_sock, ACK, strlen(ACK), 0);
-	//		break;
-	//	}
-	//	if(buffer[valread-3] == 'E' &&buffer[valread-2] == 'N' &&buffer[valread-1] == 'D'){
-	//		printf("end one ite\n");
-	//		send(new_sock, END, strlen(END), 0);
-        //        }
-	//}
-
+	new_sock = accept(sock, (struct sockaddr *)&address, (socklen_t*)&addrlen);
+	int count = 0;
+	while(1)
+	{
+		valread = read(new_sock, buffer, sizeof(buffer));
+		count += valread;
+		if(buffer[valread-3] == 'e' &&buffer[valread-2] == 'n' &&buffer[valread-1] == 'd'){
+			printf("end session\n");
+			send(new_sock, ACK, strlen(ACK), 0);
+			break;
+		}
+		if(buffer[valread-3] == 'E' &&buffer[valread-2] == 'N' &&buffer[valread-1] == 'D'){
+			printf("end one ite\n");
+			send(new_sock, END, strlen(END), 0);
+                }
+	}
+/*
 	//For Q3
 	while(1)
 	{
@@ -90,5 +90,6 @@ int main(int argc, char const *argv[])
 			close(new_sock);
 		}
 	}
+*/
 	return 0;
 }
