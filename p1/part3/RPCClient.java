@@ -59,8 +59,9 @@ public class RPCClient implements AutoCloseable {
             }
         }, consumerTag -> {
         });
+	String result = response.take();
 	System.out.println((System.nanoTime() - start)/1000000.0);
-        String result = response.take();
+        //String result = response.take();
         channel.basicCancel(ctag);
         return result;
     }
