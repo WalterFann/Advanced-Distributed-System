@@ -75,7 +75,7 @@ class GreeterClient {
 	request.set_name(user);
 	HelloReply reply;
 	std::unique_ptr<ClientWriter<HelloRequest> > writer(stub_->SayHelloStream(&context, &reply));
-	for (int i=0;i<10;i++){
+	for (int i=0;i<100;i++){
 		if(!writer->Write(request)){
 			break;
 		}
@@ -100,31 +100,32 @@ int main(int argc, char** argv) {
   GreeterClient greeter(grpc::CreateChannel(
       "129.97.167.80:8080", grpc::InsecureChannelCredentials()));
   //For Q4
-  //for (int i=0; i<100; i++){
-  //	gettimeofday(&start, NULL);
-//	std::string user("hello");
-//	std::string reply = greeter.SayHello(user);
-//	gettimeofday(&end, NULL);
-//	secs = end.tv_sec - start.tv_sec;
-//	usecs = end.tv_usec - start.tv_usec;
-//	mtime = ((secs) * 1000 + usecs/1000.0);
-//	std::cout << mtime <<std::endl;
+  for (int i=0; i<100; i++){
+	gettimeofday(&start, NULL);
+	std::string user("hello");
+	std::string reply = greeter.SayHello(user);
+	gettimeofday(&end, NULL);
+	secs = end.tv_sec - start.tv_sec;
+	usecs = end.tv_usec - start.tv_usec;
+	mtime = ((secs) * 1000 + usecs/1000.0);
+	std::cout << mtime <<std::endl;
 	//std::cout << "Greeter received: " << reply << std::endl;
-//  }
-
+  }
+/*
   //For Q6
   for (int i=0; i<100; i++){
 	gettimeofday(&start, NULL);
-	std::string user(4000000,'0');
-	std::string reply = greeter.SayHello(user);
-	//For Q6_Streaming
-	//std::string user(400000, '0');
-	//std::string reply = greeter.SayHelloStream(user);
+	//std::string user(4000000,'0');
+	//std::string reply = greeter.SayHello(user);
+	//streaming
+	std::string user(40000, '0');
+	std::string reply = greeter.SayHelloStream(user);
 	gettimeofday(&end, NULL);
 	secs = end.tv_sec - start.tv_sec;
 	usecs = end.tv_usec - start.tv_usec;
 	mtime = ((secs) * 1000 + usecs/1000.0);
 	std::cout << mtime <<std::endl;
   }
+ */
   return 0;
 }
