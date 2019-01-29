@@ -111,23 +111,13 @@ int main(int argc, char** argv) {
 //	std::cout << mtime <<std::endl;
 	//std::cout << "Greeter received: " << reply << std::endl;
 //  }
-  //For Q6_E1
-  //for (int i=0; i<100; i++){
-  //	gettimeofday(&start, NULL);
-  //	std::string user(4000000,'0');
-  //	std::string reply = greeter.SayHello(user);
-  //	gettimeofday(&end, NULL);
-  //	secs = end.tv_sec - start.tv_sec;
-  //	usecs = end.tv_usec - start.tv_usec;
-  //	mtime = ((secs) * 1000 + usecs/1000.0);
-  //	std::cout << mtime <<std::endl;
-  	//std::cout << "Greeter received: " << reply << std::endl;
-  //}
+
   //For Q6
   for (int i=0; i<100; i++){
 	gettimeofday(&start, NULL);
 	std::string user(4000000,'0');
 	std::string reply = greeter.SayHello(user);
+	//For Q6_Streaming
 	//std::string user(400000, '0');
 	//std::string reply = greeter.SayHelloStream(user);
 	gettimeofday(&end, NULL);
