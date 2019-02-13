@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package mynfs;
+
+message Path {
+	string path = 1;
+}
+
+message ErrorMessage {
+    int32 err = 1;
+}
+
+message Stat {
+    uint32 dev = 1;
+    uint32 ino = 2;
+    int32 mode = 3;
+    int32 nlink = 4;
+    uint32 uid = 5;
+    uint32 gid = 6;
+    uint32 rdev = 7;
+    int64 size = 8;
+    uint32 blksize = 9;
+    int64 blocks = 10;
+    int32 atime = 11;
+    int32 mtime = 12;
+    int32 ctime = 13;
+    int32 err = 14; 
+}
+
+message MkdirRequest {
+    string path = 1;
+    int32 mode = 2;
+}
+
+message RenameRequest {
+    string from = 1;
+    string to = 2;
+    uint32 flags = 3;
+}
+
+message OpenRequest{
+    string path = 1;
+    int32 flags = 2;
+}
+
+message OpenReply{
+    int32 fh = 1;
+    int32 err = 2;
+}
+
+message ReadRequest{
+    string path =1;
+    uint32 size =2;
+    int64 offset =3;
+    int32 fh = 4;
+}
+
+message ReadReply{
+    int32 bytesread = 1;
+    bytes buffer = 2;
+    int32 err = 3;
+}
+
+message WriteRequest{
+    string path = 1;
+    uint32 size = 2;
+    int32 offset = 3; 
+    bytes buffer = 4;
+    int32 fh = 5;
+}
+
+message WriteReply{
+    int32 nbytes = 1;
+    int32 err =2;
+}
+
+message ReaddirReply {
+	uint32 ino  =1; 
+	string name = 2;
+	uint32 type = 3;
+	int32 err = 4;
+}
+
+message CreateRequest{
+    string path =1;
+    int32 mode  =2;
+    int32 flags =3;
+}
+
+message CreateReply{
+    int32 fh = 1;
+    int32 err = 2;
+}
+
+message UtimensRequest {
+    string path = 1;
+    int64 sec1 = 2;
+    int64 nsec1 = 3;
+    int64 sec2 = 4;
+    int64 nsec2 = 5;
+}
+
+message MknodRequest {
+    string path = 1;
+    int32 mode = 2;
+    uint32 rdev = 3;
+}
+
+service NFS {
+    rpc mynfs_getattr(Path) returns (Stat) {}
+    rpc mynfs_mkdir(MkdirRequest) returns (ErrorMessage){}
+    rpc mynfs_unlink(Path) returns (ErrorMessage){}
+    rpc mynfs_rmdir(Path) returns (ErrorMessage){}
+    rpc mynfs_rename(RenameRequest) returns (ErrorMessage){}
+    rpc mynfs_open(OpenRequest) returns (OpenReply) {}
+    rpc mynfs_read(ReadRequest) returns (ReadReply) {}
+    rpc mynfs_write(WriteRequest) returns (WriteReply){}
+    rpc mynfs_readdir(Path) returns (stream ReaddirReply){}
+    rpc mynfs_create(CreateRequest) returns (CreateReply) {}
+    rpc mynfs_utimens(UtimensRequest) returns (ErrorMessage){}
+    rpc mynfs_mknod(MknodRequest) returns (ErrorMessage){}
+}

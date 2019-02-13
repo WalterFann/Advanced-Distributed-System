@@ -1,0 +1,66 @@
+write 1MB, 5MB, 10MB, 15MB, 20MB
+linux:
+1.266
+3.297
+6.802
+9.848
+13.127
+
+localhost:
+179.851
+911.715
+1878.14
+2850
+3691.61
+
+grpc+nfs:
+359.952
+1811.96
+3538.3
+5394.82
+7224.95
+
+grpc+nfs(batch write):
+177.104
+861.066
+1761.31
+2597.77
+3456.78
+
+crash(commit crash) 1000ms to recover:
+1352.78
+2727.67
+4480.78
+6091.63
+7778.75
+
+read 10kB
+linux filesystem:
+0.267
+
+localhost:
+0.944
+
+grpc+nfs:
+6.912
+
+mkdir:
+linux filesystem:
+1.249ms
+
+localhost:
+1.629ms
+
+grpc+nfs:
+6.245ms
+
+
+remove:
+linux 
+0.941
+
+local host
+1.055
+
+grpc+nfs:
+4.527
